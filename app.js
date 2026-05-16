@@ -254,12 +254,8 @@ $("#full-read-form").addEventListener("submit", (event) => {
 
   const mailtoUrl = `mailto:angie219@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   status.classList.add("is-visible");
-  status.innerHTML = `Your NUMERA request is ready. We will contact you soon. If your email app does not open, <a href="${mailtoUrl}">tap here to open the email draft</a>, then press Send.`;
-  event.submitter.textContent = "Email draft prepared";
-  event.submitter.disabled = true;
-  setTimeout(() => {
-    window.location.href = mailtoUrl;
-  }, 150);
+  status.innerHTML = `Your NUMERA request is prepared. <a class="draft-link" href="${mailtoUrl}">Open the email draft</a>, then press Send in your email app.`;
+  event.submitter.textContent = "Request prepared";
 });
 
 run();

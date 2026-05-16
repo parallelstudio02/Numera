@@ -498,6 +498,18 @@ textarea:focus {
   font-weight: 850;
 }
 
+.submit-status .draft-link {
+  display: inline-grid;
+  place-items: center;
+  min-height: 36px;
+  margin: 8px 6px 4px 0;
+  padding: 0 12px;
+  border-radius: 6px;
+  color: #fff;
+  background: var(--purple);
+  text-decoration: none;
+}
+
 .formula-row {
   grid-template-columns: 52px minmax(120px, 0.7fr) 1fr;
 }
