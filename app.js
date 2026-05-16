@@ -45,6 +45,7 @@ const relationshipLabels = [
   "Official (Overcome Me)",
   "Parents/Benefactor (Generate Me)",
 ];
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5IHWLjvAUAQethyWiVvWZD6vr3CPmXe58mRI026KmQx2pSV59jRz6qGlMqHfccPB5/exec";
 const $ = (selector) => document.querySelector(selector);
 let latestResult = null;
 let latestDobText = "";
@@ -196,7 +197,7 @@ $("#full-read-toggle").addEventListener("click", () => {
   if (!form.hidden) $("#reader-name").focus();
 });
 
-$("#full-read-form").addEventListener("submit", (event) => {
+$("#full-read-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!latestResult) return;
   const form = event.currentTarget;
@@ -231,31 +232,54 @@ $("#full-read-form").addEventListener("submit", (event) => {
   const birthDate = displayDob(latestDobText);
 
   const subject = `${submittedDate} - ${name} - ${birthDate}`;
-  const body = [
-    `Date of Submission and Time: ${submittedDateTime}`,
-    `Name: ${name}`,
-    `Birth Date: ${birthDate}`,
-    `Email Address: ${email}`,
-    `Remarks: ${remarks}`,
-    "",
-    "NUMERA Results:",
-    `Destined Dream: ${latestResult.profiles[0].code}`,
-    `Main Character: ${mainCharacter}`,
-    `Hidden Potential: ${hiddenPotential}`,
-    `Core Missing: ${missing}`,
-    `Self Element: ${latestResult.selfElement.name}`,
-    "",
-    "Five Elements:",
-    elementLines,
-    "",
-    "Consent:",
-    "I consent to my name, contact details, notes, birth figures, and NUMERA results being collected and used only to review this enquiry, prepare a full reading, and contact me about the birth figures provided.",
-  ].join("\n");
+  const payload = {
+    subject,
+    submittedAt: submittedAt.toISOString(),
+    submittedDateTime,
+    name,
+    birthDate,
+    email,
+    remarks,
+    consent: "I consent to my name, contact details, notes, birth figures, and NUMERA results being collected and used only to review this enquiry, prepare a full reading, and contact me about the birth figures provided.",
+    results: {
+      destinedDream: latestResult.profiles[0].code,
+      mainCharacter,
+      hiddenPotential,
+      coreMissing: missing,
+      selfElement: latestResult.selfElement.name,
+      fiveElements: Object.fromEntries(elements.map((element) => [element.name, latestResult.elementCounts[element.name]])),
+      profileNumbers: Object.fromEntries(latestResult.profiles.map((profile) => [profile.label, profile.code])),
+    },
+    elementSummary: elementLines,
+  };
 
-  const mailtoUrl = `mailto:angie219@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  if (!GOOGLE_SCRIPT_URL) {
+    status.classList.add("is-visible");
+    status.innerHTML = "Submission logging is almost ready. Add your Google Apps Script web app URL in app.js to start saving requests to Google Sheets.";
+    return;
+  }
+
   status.classList.add("is-visible");
-  status.innerHTML = `Your NUMERA request is prepared. <a class="draft-link" href="${mailtoUrl}">Open the email draft</a>, then press Send in your email app.`;
-  event.submitter.textContent = "Request prepared";
+  status.textContent = "Sending your NUMERA request...";
+  event.submitter.disabled = true;
+  event.submitter.textContent = "Sending...";
+
+  try {
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+    });
+
+    status.textContent = "Your NUMERA request has been submitted. We will contact you soon.";
+    event.submitter.textContent = "Request submitted";
+    form.reset();
+  } catch (error) {
+    status.textContent = "Something blocked the submission. Please try again in a moment.";
+    event.submitter.disabled = false;
+    event.submitter.textContent = "Request for the full read";
+  }
 });
 
 run();
