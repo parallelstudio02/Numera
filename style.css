@@ -106,7 +106,8 @@ h2 {
 }
 
 .privacy-note,
-.consent-copy {
+.consent-copy,
+.submit-status {
   color: var(--muted);
   font-size: 0.82rem;
   line-height: 1.55;
@@ -476,6 +477,25 @@ textarea:focus {
 
 .full-read-form button {
   justify-self: start;
+}
+
+.submit-status {
+  display: none;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid rgba(118, 82, 214, 0.24);
+  border-radius: 8px;
+  background: rgba(118, 82, 214, 0.08);
+  color: var(--purple-deep);
+}
+
+.submit-status.is-visible {
+  display: block;
+}
+
+.submit-status a {
+  color: var(--purple-deep);
+  font-weight: 850;
 }
 
 .formula-row {

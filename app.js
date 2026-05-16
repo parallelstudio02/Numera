@@ -199,6 +199,14 @@ $("#full-read-toggle").addEventListener("click", () => {
 $("#full-read-form").addEventListener("submit", (event) => {
   event.preventDefault();
   if (!latestResult) return;
+  const form = event.currentTarget;
+  const status = $("#submit-status");
+
+  if (!form.reportValidity()) {
+    status.classList.add("is-visible");
+    status.textContent = "Please add your name and email before sending the full read request.";
+    return;
+  }
 
   const name = $("#reader-name").value.trim();
   const email = $("#reader-email").value.trim();
@@ -244,7 +252,14 @@ $("#full-read-form").addEventListener("submit", (event) => {
     "I consent to my name, contact details, notes, birth figures, and NUMERA results being collected and used only to review this enquiry, prepare a full reading, and contact me about the birth figures provided.",
   ].join("\n");
 
-  window.location.href = `mailto:angie219@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailtoUrl = `mailto:angie219@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  status.classList.add("is-visible");
+  status.innerHTML = `Your NUMERA request is ready. We will contact you soon. If your email app does not open, <a href="${mailtoUrl}">tap here to open the email draft</a>, then press Send.`;
+  event.submitter.textContent = "Email draft prepared";
+  event.submitter.disabled = true;
+  setTimeout(() => {
+    window.location.href = mailtoUrl;
+  }, 150);
 });
 
 run();

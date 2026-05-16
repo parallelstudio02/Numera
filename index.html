@@ -137,11 +137,12 @@
           <label for="reader-name">Name</label>
           <input id="reader-name" name="name" autocomplete="name" required />
           <label for="reader-email">Email</label>
-          <input id="reader-email" name="email" type="email" autocomplete="email" required />
+          <input id="reader-email" name="email" type="text" inputmode="email" autocomplete="email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" required />
           <label for="reader-remarks">Remarks</label>
           <textarea id="reader-remarks" name="remarks" rows="4" placeholder="Anything you want us to look at more closely?"></textarea>
           <p class="consent-copy">By submitting this form, I consent to my name, contact details, notes, birth figures, and NUMERA results being collected and used only to review this enquiry, prepare a full reading, and contact me about the birth figures provided.</p>
-          <button type="submit">I want the full read</button>
+          <button type="submit">Request for the full read</button>
+          <p class="submit-status" id="submit-status" role="status" aria-live="polite"></p>
         </form>
       </section>
     </main>
