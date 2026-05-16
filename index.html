@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NUMERA</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="intro">
+        <div>
+          <h1>NUMERA</h1>
+          <p class="lede">Decode the hidden patterns behind your birth numbers.</p>
+          <p class="sublede">Generate your core grid, profile numbers, missing numbers, and five-element balance through a modern numerology system.</p>
+        </div>
+        <form class="input-panel" id="dob-form">
+          <label for="dob-text">Date of birth</label>
+          <input id="dob-text" inputmode="numeric" maxlength="10" value="11/12/1991" aria-describedby="dob-help" />
+          <span id="dob-help">DD/MM/YYYY</span>
+          <p class="privacy-note">Figures entered here stay on this page and are not recorded unless you submit the full-read form.</p>
+        </form>
+      </section>
+
+      <section class="panel grid-panel">
+        <div class="section-title">
+          <h2>Numera Grid</h2>
+          <span id="dob-display">11 12 1991</span>
+        </div>
+        <div class="diagram-wrap" aria-label="Shu Yi number grid">
+          <svg class="diagram-lines" viewBox="0 0 720 610" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="lineGradient" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#39225f" />
+                <stop offset="100%" stop-color="#7652d6" />
+              </linearGradient>
+            </defs>
+            <path d="M140 138 H580 L360 420 Z" />
+            <path d="M360 112 V282" />
+            <path d="M360 282 L250 420 H470 Z" />
+            <path d="M360 282 L470 420" />
+            <path d="M360 282 L250 420" />
+            <path d="M360 420 V500" />
+            <path d="M102 585 H618" />
+            <path d="M118 585 L142 565 M118 585 L142 605" />
+            <path d="M602 585 L578 565 M602 585 L578 605" />
+          </svg>
+          <span class="diagram-node circle top" id="n-dream">1</span>
+          <span class="diagram-node top-left" id="n-a">2</span>
+          <span class="diagram-node top-mid-left" id="n-b">3</span>
+          <span class="diagram-node top-mid-right" id="n-d">1</span>
+          <span class="diagram-node top-right" id="n-e">1</span>
+          <span class="diagram-node mid-left" id="n-c">5</span>
+          <span class="diagram-node mid-right" id="n-f">2</span>
+          <span class="diagram-node center" id="n-g">7</span>
+          <span class="diagram-node low-left" id="n-i">9</span>
+          <span class="diagram-node low-right" id="n-h">3</span>
+          <span class="diagram-node circle bottom" id="n-p">6</span>
+          <div class="bottom-rail">
+            <span id="n-m">3</span>
+            <span id="n-l">8</span>
+            <span id="n-k">7</span>
+            <span id="n-n">3</span>
+            <span id="n-o">3</span>
+            <span id="n-q">1</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary-band" aria-label="Main results">
+        <article>
+          <span>Destined Dream</span>
+          <strong id="destined-dream">1</strong>
+        </article>
+        <article>
+          <span>Main Character</span>
+          <strong id="main-character">527</strong>
+        </article>
+        <article>
+          <span>Hidden Potential</span>
+          <strong id="hidden-potential">145</strong>
+        </article>
+        <article>
+          <span>Core Missing</span>
+          <strong id="missing-core">4,6,8,9</strong>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel">
+          <div class="section-title">
+            <h2>Five Elements</h2>
+          </div>
+          <div class="element-list" id="element-list"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Element Relationship View</h2>
+        </div>
+        <div class="relationship-table" id="relationship-table"></div>
+      </section>
+
+      <section class="insight-grid" aria-label="Numerology descriptions">
+        <article class="panel insight-card">
+          <span>Destined Dream</span>
+          <h2 id="dream-title">Your inner direction</h2>
+          <p id="dream-description">This placeholder describes the deeper desire, long-term pull, and quiet motivation behind this person's birth numbers.</p>
+        </article>
+        <article class="panel insight-card">
+          <span>Main Character</span>
+          <h2 id="character-title">Your natural expression</h2>
+          <p id="character-description">This placeholder describes the visible personality, decision style, and the way this person tends to move through life.</p>
+        </article>
+        <article class="panel insight-card">
+          <span>Core Missing</span>
+          <h2 id="missing-title">Your growth area</h2>
+          <p id="missing-description">This placeholder describes the missing numbers as development themes, blind spots, or lessons that may need more attention.</p>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Profile Numbers</h2>
+        </div>
+        <div class="profile-table" id="profile-table"></div>
+      </section>
+
+      <section class="cta-panel">
+        <div>
+          <h2>Ready to go deeper?</h2>
+          <p>Leave your details and the current NUMERA figures will be prepared into an email for a fuller reading enquiry.</p>
+        </div>
+        <button type="button" id="full-read-toggle">Get the full read</button>
+        <form class="full-read-form" id="full-read-form" hidden>
+          <label for="reader-name">Name</label>
+          <input id="reader-name" name="name" autocomplete="name" required />
+          <label for="reader-email">Email</label>
+          <input id="reader-email" name="email" type="email" autocomplete="email" required />
+          <label for="reader-remarks">Remarks</label>
+          <textarea id="reader-remarks" name="remarks" rows="4" placeholder="Anything you want us to look at more closely?"></textarea>
+          <p class="consent-copy">By submitting this form, I consent to my name, contact details, notes, birth figures, and NUMERA results being collected and used only to review this enquiry, prepare a full reading, and contact me about the birth figures provided.</p>
+          <button type="submit">I want the full read</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
