@@ -1,8 +1,8 @@
 const stateKeys = [
   ["A", "n-a"], ["B", "n-b"], ["C", "n-c"], ["D", "n-d"], ["E", "n-e"],
-  ["F", "n-f"], ["G", "n-g"], ["H", "n-h"], ["I", "n-i"], ["J", null],
+  ["F", "n-f"], ["G", "n-g"], ["H", "n-h"], ["I", "n-i"], ["J", "n-j"],
   ["K", "n-k"], ["L", "n-l"], ["M", "n-m"], ["N", "n-n"], ["O", "n-o"],
-  ["P", "n-p"], ["Q", "n-q"], ["R", null], ["S", null],
+  ["P", null], ["Q", "n-q"], ["R", null], ["S", null],
 ];
 
 const profileDefs = [
@@ -133,7 +133,8 @@ function render(result, dobText) {
   $("#missing-core").textContent = result.coreMissing.length ? result.coreMissing.join(",") : "None";
 
   stateKeys.forEach(([key, id]) => {
-    if (id) document.getElementById(id).textContent = result.n[key];
+    const node = id ? document.getElementById(id) : null;
+    if (node) node.textContent = result.n[key];
   });
 
   $("#element-list").innerHTML = elements.map((element) => {
