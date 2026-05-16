@@ -618,14 +618,14 @@ textarea:focus {
   }
 
   .diagram-wrap {
-    aspect-ratio: 1 / 1.22;
+    aspect-ratio: 1 / 1.42;
   }
 
   .diagram-lines {
-    left: 2.5%;
-    right: 2.5%;
+    left: 4%;
+    right: 4%;
     top: 8%;
-    bottom: 21%;
+    bottom: 30%;
   }
 
   .diagram-node,
@@ -641,20 +641,20 @@ textarea:focus {
     height: 36px;
   }
 
-  .diagram-node.top { top: 12.5%; }
-  .diagram-node.top-left { left: 22%; top: 29%; }
-  .diagram-node.top-mid-left { left: 39%; top: 29%; }
-  .diagram-node.top-mid-right { left: 61%; top: 29%; }
-  .diagram-node.top-right { left: 78%; top: 29%; }
-  .diagram-node.mid-left { left: 37%; top: 48%; }
-  .diagram-node.mid-right { left: 61%; top: 48%; }
-  .diagram-node.center { top: 58%; }
+  .diagram-node.top { top: 12%; }
+  .diagram-node.top-left { left: 22%; top: 28%; }
+  .diagram-node.top-mid-left { left: 39%; top: 28%; }
+  .diagram-node.top-mid-right { left: 61%; top: 28%; }
+  .diagram-node.top-right { left: 78%; top: 28%; }
+  .diagram-node.mid-left { left: 37%; top: 46.5%; }
+  .diagram-node.mid-right { left: 61%; top: 46.5%; }
+  .diagram-node.center { top: 56%; }
   .diagram-node.low-left { left: 38%; top: 66%; }
   .diagram-node.low-right { left: 62%; top: 66%; }
-  .diagram-node.bottom { top: 74%; }
+  .diagram-node.bottom { top: 76%; }
 
   .bottom-rail {
-    bottom: 4.5%;
+    bottom: 4%;
     gap: 5px;
   }
 }
