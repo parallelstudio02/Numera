@@ -1,152 +1,16 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NUMERA</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main class="shell">
-      <section class="intro">
-        <div>
-          <h1>NUMERA</h1>
-          <p class="lede">Decode the hidden patterns behind your birth numbers.</p>
-          <p class="sublede">Generate your core grid, profile numbers, missing numbers, and five-element balance through a modern numerology system.</p>
-        </div>
-        <form class="input-panel" id="dob-form">
-          <label for="dob-text">Date of birth</label>
-          <input id="dob-text" inputmode="numeric" maxlength="10" value="01/01/1990" aria-describedby="dob-help" />
-          <span id="dob-help">DD/MM/YYYY</span>
-          <p class="privacy-note">Figures entered here stay on this page and are not recorded unless you submit the full-read form.</p>
-        </form>
-      </section>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NUMERA — Reading Studio</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="purple.css"></head><body>
+<aside class="sidebar"><a class="brand" href="#"><span class="brand-icon">N</span> NUMERA<span class="brand-dot">®</span></a><div class="workspace">YOUR WORKSPACE</div><nav><button class="nav active" data-page="reading"><span>◈</span> Reading studio</button><button class="nav" data-page="library"><span>▤</span> Saved readings <small id="history-count">0</small></button></nav><div class="sidebar-bottom"><div class="orbit">✧</div><h3>A little more clarity.</h3><p>A thoughtful space to explore the patterns in your numbers.</p><span class="edition">STUDIO EDITION</span></div></aside>
+<div class="app"><header><span>Workspace <b>/</b> <span id="breadcrumb">Reading studio</span></span><span class="private"><i></i> Private, on this device</span></header><main>
+<section id="page-reading" class="page"><div class="page-heading"><div><div class="eyebrow">THE READING STUDIO</div><h1>Every number tells a story.</h1><p>Explore the patterns. Make room for possibility.</p></div><button class="outline" id="new-reading">＋ New reading</button></div>
+<form id="reading-form" class="input-strip"><div class="field"><label for="dob">DATE OF BIRTH <span>DDMMYYYY</span></label><input id="dob" type="text" inputmode="numeric" maxlength="8" pattern="[0-9]{8}" placeholder="DDMMYYYY" value="" autocomplete="off" required aria-describedby="dob-help"><span id="dob-help" class="sr-only">Enter eight digits: day, month, then year.</span></div><div class="field"><label for="name">READING FOR <span>Required to save</span></label><input id="name" placeholder="Enter a name" autocomplete="name" maxlength="100"></div><button class="gold" type="submit" id="save-pdf-top">Save PDF <span>↗</span></button></form>
+<div id="reading-empty" class="panel reading-empty"><h2>Your reading starts with a date.</h2><p>Enter your birth date as DDMMYYYY. Your numbers will appear automatically.</p></div><div id="reading-results" hidden><div class="reading-top"><div><span class="live-dot"></span><span id="reading-person">Sample reading</span><span class="muted" id="reading-date"></span></div><span class="micro">NUMERA METHOD / V1</span></div>
+<div class="reading-layout"><article class="panel grid-panel"><div class="panel-heading"><div><span class="eyebrow">01 / YOUR BLUEPRINT</span><h2>The Numera grid</h2></div><span class="pill" id="self-pill"></span></div><div id="grid"></div></article>
+<div class="metrics" id="metrics"></div><article class="panel balance"><div class="panel-heading"><div><span class="eyebrow">02 / THE BALANCE</span><h2>Your five elements</h2></div></div><div id="elements"></div></article></div>
+<article class="panel relationships"><div class="panel-heading"><div><span class="eyebrow">03 / CONNECTIONS</span><h2>Element relationships</h2></div></div><div id="relationships"></div></article>
+<div class="section-header"><div><span class="eyebrow">04 / A DEEPER LOOK</span><h2>From patterns to perspective.</h2></div><span class="muted">A starting point for reflection</span></div><div class="insights" id="insights"></div>
+<div class="dashboard-grid lower"><article class="panel"><div class="panel-heading"><div><span class="eyebrow">05 / THE DETAILS</span><h2>Your profile numbers</h2></div><button class="text-button" id="expand-profiles" aria-expanded="false">View all 14 ↓</button></div><div id="profiles"></div></article><article class="panel"><div class="panel-heading"><div><span class="eyebrow">06 / PERSONAL SPACE</span><h2>Notes & intentions</h2></div><span>✎</span></div><p class="muted">What resonates? What would you like to explore?</p><textarea id="notes" rows="6" placeholder="Capture a reflection, a question, or an intention for your next session…" maxlength="10000"></textarea><div class="note-bottom"><span class="muted">Saved with your reading on this device</span><button class="text-button" id="save-local">Save on device ↗</button></div></article></div>
 
-      <section class="panel grid-panel">
-        <div class="section-title">
-          <h2>Numera Grid</h2>
-          <span id="dob-display">01/01/1990</span>
-        </div>
-        <div class="diagram-wrap" aria-label="Shu Yi number grid">
-          <svg class="diagram-lines" viewBox="0 0 720 610" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="lineGradient" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#39225f" />
-                <stop offset="100%" stop-color="#7652d6" />
-              </linearGradient>
-            </defs>
-            <path d="M140 138 H580 L360 420 Z" />
-            <path d="M360 112 V282" />
-            <path d="M360 282 L250 420 H470 Z" />
-            <path d="M360 282 L470 420" />
-            <path d="M360 282 L250 420" />
-            <path d="M360 420 V500" />
-            <path d="M102 585 H618" />
-            <path d="M118 585 L142 565 M118 585 L142 605" />
-            <path d="M602 585 L578 565 M602 585 L578 605" />
-          </svg>
-          <span class="diagram-node circle top" id="n-dream">1</span>
-          <span class="diagram-node top-left" id="n-a">2</span>
-          <span class="diagram-node top-mid-left" id="n-b">3</span>
-          <span class="diagram-node top-mid-right" id="n-d">1</span>
-          <span class="diagram-node top-right" id="n-e">1</span>
-          <span class="diagram-node mid-left" id="n-c">5</span>
-          <span class="diagram-node mid-right" id="n-f">2</span>
-          <span class="diagram-node center" id="n-g">7</span>
-          <span class="diagram-node low-left" id="n-i">9</span>
-          <span class="diagram-node low-right" id="n-h">3</span>
-          <span class="diagram-node circle bottom" id="n-j">6</span>
-          <div class="bottom-rail">
-            <span id="n-m">3</span>
-            <span id="n-l">8</span>
-            <span id="n-k">7</span>
-            <span id="n-n">3</span>
-            <span id="n-o">3</span>
-            <span id="n-q">1</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="summary-band" aria-label="Main results">
-        <article>
-          <span>Destined Dream</span>
-          <strong id="destined-dream">1</strong>
-        </article>
-        <article>
-          <span>Main Character</span>
-          <strong id="main-character">527</strong>
-        </article>
-        <article>
-          <span>Hidden Potential</span>
-          <strong id="hidden-potential">145</strong>
-        </article>
-        <article>
-          <span>Core Missing</span>
-          <strong id="missing-core">4,6,8,9</strong>
-        </article>
-      </section>
-
-      <section class="content-grid">
-        <div class="panel">
-          <div class="section-title">
-            <h2>Five Elements</h2>
-          </div>
-          <div class="element-list" id="element-list"></div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="section-title">
-          <h2>Element Relationship View</h2>
-        </div>
-        <div class="relationship-table" id="relationship-table"></div>
-      </section>
-
-      <section class="insight-grid" aria-label="Numerology descriptions">
-        <article class="panel insight-card">
-          <span>Destined Dream</span>
-          <h2 id="dream-title">Your inner direction</h2>
-          <p id="dream-description">This placeholder describes the deeper desire, long-term pull, and quiet motivation behind this person's birth numbers.</p>
-        </article>
-        <article class="panel insight-card">
-          <span>Main Character</span>
-          <h2 id="character-title">Your natural expression</h2>
-          <p id="character-description">This placeholder describes the visible personality, decision style, and the way this person tends to move through life.</p>
-        </article>
-        <article class="panel insight-card">
-          <span>Core Missing</span>
-          <h2 id="missing-title">Your growth area</h2>
-          <p id="missing-description">This placeholder describes the missing numbers as development themes, blind spots, or lessons that may need more attention.</p>
-        </article>
-      </section>
-
-      <section class="panel">
-        <div class="section-title">
-          <h2>Profile Numbers</h2>
-        </div>
-        <div class="profile-table" id="profile-table"></div>
-      </section>
-
-      <section class="cta-panel">
-        <div>
-          <h2>Ready to go deeper?</h2>
-          <p>Leave your details and your NUMERA request will be logged for a fuller reading enquiry.</p>
-        </div>
-        <button type="button" id="full-read-toggle">Get the full read</button>
-        <form class="full-read-form" id="full-read-form" hidden>
-          <label for="reader-name">Name</label>
-          <input id="reader-name" name="name" autocomplete="name" required />
-          <label for="reader-email">Email</label>
-          <input id="reader-email" name="email" type="text" inputmode="email" autocomplete="email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" required />
-          <label for="reader-remarks">Remarks</label>
-          <textarea id="reader-remarks" name="remarks" rows="4" placeholder="Anything you want us to look at more closely?"></textarea>
-          <p class="consent-copy">By submitting this form, I consent to my name, contact details, notes, birth figures, and NUMERA results being collected and used only to review this enquiry, prepare a full reading, and contact me about the birth figures provided.</p>
-          <button type="submit">Request for the full read</button>
-          <p class="submit-status" id="submit-status" role="status" aria-live="polite"></p>
-        </form>
-      </section>
-    </main>
-
-    <script src="app.js"></script>
-  </body>
-</html>
+<p class="disclaimer">Numerology is an interpretive practice for personal reflection. These patterns are not scientific predictions or medical, financial, or relationship advice.</p></div></section>
+<section id="page-library" class="page" hidden><div class="eyebrow">YOUR PERSONAL ARCHIVE</div><h1>Saved readings.</h1><p class="muted">Your saved PDFs and readings on this device, with verified Drive status for each report.</p><div id="library"></div></section>
+<footer><a class="footer-brand" href="#">NUMERA</a><span>A thoughtful practice. A clearer perspective.</span><span>PRIVATE READING STUDIO</span></footer></main></div><div id="toast" role="status" aria-live="polite"></div><div id="print-report"></div><dialog id="drive-setup"><button id="close-drive-setup" class="text-button dialog-close" type="button" aria-label="Close Google setup">Close ×</button><div class="eyebrow">PRIVATE GOOGLE SAVER</div><h2>One link. Your own Drive.</h2><p>Your PDF is already saved on this device. Connect a private Google saver once to send it to your reports folder.</p><ol class="simple-setup"><li><a href="https://script.google.com/home/start" target="_blank" rel="noopener">Open Google Apps Script ↗</a> using the account that owns your folder.</li><li><button class="text-button" type="button" id="copy-drive-script">Copy setup script</button>, paste it into the new project, and choose <strong>Deploy → New deployment → Web app</strong>.</li><li>Set <strong>Execute as: Me</strong> and <strong>Who has access: Only myself</strong>. Deploy, authorize Google, and paste the web-app link below.</li></ol><form id="google-setup-form"><label for="drive-webapp-url">Your Google saver link</label><input id="drive-webapp-url" required type="url" placeholder="https://script.google.com/macros/s/…/exec"><button class="gold" type="submit" style="margin-top:16px">Connect Google saver ↗</button></form><p class="muted"><a href="google-drive/Code.gs" target="_blank" rel="noopener">View setup script</a> · No API keys, client IDs, or folder picker. Keep the web app private.</p></dialog><script src="vendor/pdfmake.min.js"></script><script src="vendor/vfs_fonts.js"></script><script src="core.js"></script><script src="pdf-report.js"></script><script src="config.js"></script><script src="drive-save.js"></script><script src="studio.js"></script><script src="archive.js"></script></body></html>

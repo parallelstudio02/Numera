@@ -1,0 +1,22 @@
+/* Vector PDF reports. pdfmake 0.2.12 and Roboto fonts are bundled locally. */
+function reportBirthDate(iso){const [year,month,day]=iso.split('-');return `${day}-${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(month)-1]}-${year}`;}
+function reportFileName(reading){return `${reading.name.replace(/[<>:"/\\|?*\u0000-\u001f]/g,'').trim()||'Reading'} - ${reportBirthDate(reading.dob)} - Numera.pdf`;}
+function reportGrid(result){let svg=gridSvg(result).replace(/<title>.*?<\/title>/g,'').replace('class="grid-lines" fill="none"','fill="none" stroke="#a27bdf" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"').replace(/<circle /g,'<circle fill="#171020" stroke="#644780" stroke-width="1.2" ').replace(/<rect /g,'<rect fill="#21132f" stroke="#6f4895" stroke-width="1.2" ').replace(/<text /g,'<text fill="#f7f0ff" font-family="Roboto" font-size="25" font-weight="bold" ');svg=svg.replace(/(<g class="grid-node grid-accent"[^>]*>)(.*?)(<\/g>)/g,(_,a,b,c)=>a+b.replace('fill="#21132f"','fill="#824bc3"').replace('stroke="#6f4895"','stroke="#cfacff"')+c);return svg;}
+function pdfDefinition(reading){
+ const r=reading.result, stamp=singaporeDate(new Date(reading.generatedAt||Date.now()));
+ const C={bg:'#0b0811',panel:'#181020',line:'#3d2851',text:'#f4ecfb',muted:'#b9a7cb',purple:'#cea7ff'};
+ const colors={Water:'#8db8df',Wood:'#a0c88c',Fire:'#e2a08e',Earth:'#e4ca83',Metal:'#c4cbd0'};
+ const self=r.selfElement.name;
+ const cardLayout={hLineColor:()=>C.line,vLineColor:()=>C.line,paddingLeft:()=>11,paddingRight:()=>11,paddingTop:()=>9,paddingBottom:()=>9};
+ const content=[
+ {columns:[{width:'*',stack:[{text:reading.name,fontSize:reading.name.length>45?14:18,bold:true,color:C.text},{text:'PERSONAL NUMEROLOGY READING',fontSize:7,color:C.muted,characterSpacing:1.1,margin:[0,5,0,0]}]},{width:155,stack:[{text:'BIRTH DATE',fontSize:7,color:C.muted,characterSpacing:1.1},{text:reportBirthDate(reading.dob),fontSize:11,color:C.purple,bold:true,margin:[0,4,0,7]},{text:'GENERATED ON',fontSize:7,color:C.muted,characterSpacing:1.1},{text:stamp,fontSize:8,color:C.text,margin:[0,4,0,0]}]}],margin:[0,0,0,6]},
+ {text:'Your numbers. Your perspective.',fontSize:21,color:C.purple,bold:true,margin:[0,8,0,0]},
+ {svg:reportGrid(r),width:320,alignment:'center',margin:[0,8,0,2]},
+ {table:{widths:['*','*','*','*'],body:[[['Destined Dream',r.profiles[0].code],['Main Character',r.profiles[3].code],['Hidden Potential',r.profiles[13].code],['Missing Numbers',r.coreMissing.join(', ')||'None']].map(([label,value])=>({fillColor:C.panel,stack:[{text:label,fontSize:7.5,color:C.muted},{text:value,fontSize:value.length>8?15:19,bold:true,color:C.purple,margin:[0,6,0,0]}]}))]},layout:cardLayout,margin:[0,8,0,0]},
+ {text:'Element relationships',fontSize:16,color:C.text,bold:true,margin:[0,17,0,10]},
+ {table:{widths:['*'],body:[[{fillColor:'#2d1c3d',stack:[{text:'SELF',alignment:'center',fontSize:7,color:C.purple,characterSpacing:1},{text:`${self} - ${r.elementCounts[self]}`,alignment:'center',fontSize:19,bold:true,color:colors[self],margin:[0,5,0,0]}]}]]},layout:cardLayout},
+ {columns:relationshipOrders[self].slice(1).map((name,i)=>({width:'*',stack:[{canvas:[{type:'rect',x:0,y:0,w:111,h:2,color:colors[name]}]},{text:relationshipLabels[i+1],fontSize:7,color:C.muted,margin:[0,8,0,8]},{text:`${name} - ${r.elementCounts[name]}`,fontSize:12,bold:true,color:colors[name]}]})),columnGap:12,margin:[0,12,0,0]}
+ ];
+ return {pageSize:'A4',pageMargins:[42,60,42,58],info:{title:reportFileName(reading).replace(/\.pdf$/,''),author:'Numera',subject:'Personal numerology reading'},defaultStyle:{font:'Roboto',color:C.text,fontSize:10},background:(page,size)=>({canvas:[{type:'rect',x:0,y:0,w:size.width,h:size.height,color:C.bg},{type:'rect',x:0,y:0,w:6,h:size.height,color:'#623a89'}]}),header:()=>({columns:[{text:'NUMERA / PERSONAL READING',color:C.purple,bold:true,fontSize:8,characterSpacing:1.3},{text:'READING SUMMARY',alignment:'right',color:C.muted,fontSize:7}],margin:[42,27,42,0]}),footer:()=>({stack:[{canvas:[{type:'line',x1:0,y1:0,x2:511,y2:0,lineWidth:.5,lineColor:C.line}]},{text:`${reading.name}  ·  ${reportBirthDate(reading.dob)}  ·  Generated ${stamp}`,fontSize:7,color:C.muted,margin:[0,8,0,4]},{text:'For personal reflection. Not a scientific prediction.',fontSize:7,color:'#9783aa'}],margin:[42,0,42,0]}),content};
+}
+function createPdfBlob(reading){return new Promise((resolve,reject)=>{try{pdfMake.createPdf(pdfDefinition(reading)).getBlob(resolve);}catch(error){reject(error)}})}
