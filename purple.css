@@ -126,3 +126,11 @@ textarea{background:#0e0a14;border-color:#3d2c4b;color:#e2d3ee}textarea::placeho
 
 
 .relationship-self strong{font-size:28px}.relationship-self small{font-size:12px}
+
+/* Element colors and a larger mobile blueprint. */
+#self-pill{color:var(--element);border-color:var(--element);background:color-mix(in srgb,var(--element) 12%,#141019)}
+.element-row b{font-size:16px;font-weight:600;color:var(--element)}
+.relationship strong,.relationship-self strong{color:var(--element)}
+.relationship{border-top:2px solid var(--element)}
+.relationship-self{border-color:var(--element);background:color-mix(in srgb,var(--element) 13%,#141019)}
+@media(max-width:800px){main{padding-left:14px;padding-right:14px}.grid-panel{padding:18px 10px 12px}.grid-panel .panel-heading{padding:0 6px}.grid-panel #grid{width:100%;max-width:none}.aligned-grid .grid-node text,.aligned-grid .grid-rail text{font-size:30px}.aligned-grid .grid-node circle{r:24px}.aligned-grid .grid-accent text{font-size:30px}}

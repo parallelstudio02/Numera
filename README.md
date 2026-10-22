@@ -14,11 +14,9 @@ Save PDF creates the report and stores its actual bytes and reading details in t
 
 The PDF is one A4 page: identity, generation timestamp, aligned grid, compact summary values, and color-coded element relationships. It excludes the profile table, reflection page, and separate five-element counts. Notes are retained in the device reading.
 
-## Simpler Google Drive saving
+## Local PDF saving
 
-Deploy google-drive/Code.gs privately in the Google account that owns the reports folder. Paste the resulting single /exec URL into Numera. No API keys, OAuth client IDs, or folder picker are needed. See GOOGLE-SETUP.md.
-
-A Google window handles uploads. After it confirms the saved PDF, choose Back to Numera to update the archive. Device copies remain available if Google is not configured, a window is blocked, or an upload is unconfirmed. Google web-app deployment and live uploads require authorization in the owner’s account and are not yet verified.
+Save PDF downloads the one-page report and stores the PDF and reading in this browser. Saved readings can reopen the reading or download the same PDF later. No cloud upload or external account setup is used.
 
 ## Calculation method and dependencies
 
