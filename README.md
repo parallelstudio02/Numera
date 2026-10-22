@@ -16,7 +16,7 @@ The PDF is one A4 page: identity, generation timestamp, aligned grid, compact su
 
 ## Local PDF saving
 
-Save PDF downloads the one-page report and stores the PDF and reading in this browser. Saved readings can reopen the reading or download the same PDF later. No cloud upload or external account setup is used.
+Save PDF stores the report and reading in this browser without starting a download. Choose Download PDF in Saved readings when you want the file. Saved readings can reopen the reading or download the same PDF later. No cloud upload or external account setup is used.
 
 ## Calculation method and dependencies
 
